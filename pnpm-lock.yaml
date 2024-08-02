@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      electron:
+        specifier: ^31.3.1
+        version: 31.3.1
     devDependencies:
       '@rushstack/eslint-patch':
         specifier: ^1.8.0
@@ -29,9 +33,6 @@ importers:
       '@vue/tsconfig':
         specifier: ^0.5.1
         version: 0.5.1
-      electron:
-        specifier: ^31.3.1
-        version: 31.3.1
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
