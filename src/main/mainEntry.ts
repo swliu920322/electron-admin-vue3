@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron'
 import type { BrowserWindowConstructorOptions } from 'electron'
+import * as process from 'process'
 // 隐藏渲染进程开发者调试工具的警告
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 let mainWindow: BrowserWindow

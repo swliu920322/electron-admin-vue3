@@ -1,4 +1,5 @@
 import { ViteDevServer } from 'vite'
+import { AddressInfo } from 'net'
 
 export const devPlugin = () => {
   return {
@@ -14,7 +15,7 @@ export const devPlugin = () => {
       if (server.httpServer) {
         server.httpServer.once('listening', () => {
           const { spawn } = require('child_process')
-          const addressInfo = server.httpServer?.address()
+          const addressInfo = server.httpServer?.address() as AddressInfo
           const httpAddress = `http://${addressInfo?.address}:${addressInfo?.port}`
           const electronProcess = spawn(require('electron').toString(), ['./dist/mainEntry.js', httpAddress], {
             cwd: process.cwd(),
