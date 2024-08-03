@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import * as process from 'process';
+import type { CliOptions } from 'electron-builder/out/builder';
 
 class BuildObj {
   // 编译主进程
@@ -31,7 +32,7 @@ class BuildObj {
   
   // 使用electron-builder构建安装包
   buildInstaller() {
-    const options = {
+    const options: CliOptions = {
       config: {
         directories: {
           output: path.join(process.cwd(), 'release'),
@@ -52,7 +53,7 @@ class BuildObj {
         },
         publish: [{ provider: 'generic', url: 'http://localhost:5500' }]
       },
-      project: process.cwd()
+      projectDir: process.cwd()
     };
     return require('electron-builder').build(options);
   }
