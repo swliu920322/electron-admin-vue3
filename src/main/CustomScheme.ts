@@ -77,7 +77,6 @@ export class CustomScheme {
         {
           status: 200,
           headers: { 'content-type': this.getMimeType(extension) }
-          // data: fs.createReadStream(tarFile)
         });
     });
   }
