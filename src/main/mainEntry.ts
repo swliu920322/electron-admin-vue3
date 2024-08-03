@@ -1,9 +1,10 @@
-import { app, BrowserWindow } from 'electron'
-import type { BrowserWindowConstructorOptions } from 'electron'
-import * as process from 'process'
+import { app, BrowserWindow } from 'electron';
+import type { BrowserWindowConstructorOptions } from 'electron';
+import * as process from 'process';
+import { CustomScheme } from './CustomScheme';
 // 隐藏渲染进程开发者调试工具的警告
-process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
-let mainWindow: BrowserWindow
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
+let mainWindow: BrowserWindow;
 
 app.whenReady().then(() => {
   const config: BrowserWindowConstructorOptions = {
@@ -17,8 +18,14 @@ app.whenReady().then(() => {
       spellcheck: false,
       disableHtmlFullscreenWindowResize: true
     }
+  };
+  mainWindow = new BrowserWindow(config);
+  mainWindow.webContents.openDevTools({ mode: 'undocked' });
+  
+  if (process.argv[2]) {
+    mainWindow.loadURL(process.argv[2]);
+  } else {
+    CustomScheme.registerScheme();
+    mainWindow.loadURL(`app://index.html`);
   }
-  mainWindow = new BrowserWindow(config)
-  mainWindow.webContents.openDevTools({ mode: 'undocked' })
-  mainWindow.loadURL(process.argv[2])
-})
+});
